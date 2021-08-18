@@ -49,6 +49,8 @@ PROGRAMAS_PARA_INSTALAR=(
   net-tools
   nodejs
   npm
+  php
+  php-cli
   php8.0 
   php8.0-intl 
   php8.0-mysql 
@@ -65,6 +67,7 @@ PROGRAMAS_PARA_INSTALAR=(
   steam:i386
   steam-devices
   steam-installer
+  unzip
   tree
   virtualbox
   wine
