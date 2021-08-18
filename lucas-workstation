@@ -4,6 +4,7 @@
 PPA_LIBRATBAG="ppa:libratbag-piper/piper-libratbag-git"
 PPA_LUTRIS="ppa:lutris-team/lutris"
 PPA_GRAPHICS_DRIVERS="ppa:graphics-drivers/ppa"
+PPA_PHP="ppa:ondrej/php"
 
 URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
 URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
@@ -16,14 +17,14 @@ URL_MSPACK="https://packages.microsoft.com/config/ubuntu/20.04/packages-microsof
 DIRETORIO_DOWNLOADS="$HOME/Downloads/programas"
 
 PROGRAMAS_PARA_INSTALAR=(
-  apt-transport-https -y
-  aspnetcore-runtime-5.0 -y
+  apt-transport-https
+  aspnetcore-runtime-5.0
   build-essential 
   curl
   docker
   docker-compose
-  dotnet-sdk-5.0 -y
-  dotnet-runtime-5.0 -y
+  dotnet-sdk-5.0
+  dotnet-runtime-5.0
   flameshot
   flatpak 
   git
@@ -47,12 +48,19 @@ PROGRAMAS_PARA_INSTALAR=(
   nemo-dropbox
   net-tools
   nodejs
+  npm
+  php8.0 
+  php8.0-intl 
+  php8.0-mysql 
+  php8.0-sqlite3 
+  php8.0-gd
   piper
   python3
   python3-pip
   ratbagd
   Samba
   snapd
+  software-properties-common
   speedtest-cli
   steam:i386
   steam-devices
@@ -77,9 +85,13 @@ sudo dpkg --add-architecture i386
 sudo apt update -y
 
 ## Adicionando repositórios de terceiros e suporte a Snap (Driver Logitech, Lutris e Drivers Nvidia)##
+cd ~
+curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+
 sudo apt-add-repository "$PPA_LIBRATBAG" -y
 sudo add-apt-repository "$PPA_LUTRIS" -y
 sudo apt-add-repository "$PPA_GRAPHICS_DRIVERS" -y
+sudo add-apt-repository "$PPA_PHP" -y
 wget -nc "$URL_WINE_KEY"
 sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE bionic main"
