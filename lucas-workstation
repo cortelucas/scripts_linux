@@ -11,14 +11,19 @@ URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_curre
 URL_SIMPLE_NOTE="https://github.com/Automattic/simplenote-electron/releases/download/v1.8.0/Simplenote-linux-1.8.0-amd64.deb"
 URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.9.2-1_amd64.deb"
 URL_VIVALD="https://downloads.vivaldi.com/stable/vivaldi-stable_4.1.2369.11-1_amd64.deb -O vivaldi.deb"
+URL_MSPACK="https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
 
 DIRETORIO_DOWNLOADS="$HOME/Downloads/programas"
 
 PROGRAMAS_PARA_INSTALAR=(
+  apt-transport-https -y
+  aspnetcore-runtime-5.0 -y
   build-essential 
   curl
   docker
   docker-compose
+  dotnet-sdk-5.0 -y
+  dotnet-runtime-5.0 -y
   flameshot
   flatpak 
   git
@@ -89,7 +94,8 @@ mkdir "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_GOOGLE_CHROME"       -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_SIMPLE_NOTE"         -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_VIVALDI"		   -P "$DIRETORIO_DOWNLOADS"
+wget -c "$URL_MSPACK"              -P "$DIRETORIO_DOWNLOADS"
+wget -c "$URL_VIVALDI"		         -P "$DIRETORIO_DOWNLOADS"
 
 ## Instalando pacotes .deb baixados na sessão anterior ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
