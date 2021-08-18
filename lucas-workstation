@@ -10,14 +10,13 @@ URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
 URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 URL_SIMPLE_NOTE="https://github.com/Automattic/simplenote-electron/releases/download/v1.8.0/Simplenote-linux-1.8.0-amd64.deb"
 URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.9.2-1_amd64.deb"
-URL_INSYNC="https://d2t3ff60b2tol4.cloudfront.net/builds/insync_3.0.20.40428-bionic_amd64.deb"
 URL_VIVALD="https://downloads.vivaldi.com/stable/vivaldi-stable_4.1.2369.11-1_amd64.deb -O vivaldi.deb"
-URL_TEAMS="https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb -O teams.deb"
 
 DIRETORIO_DOWNLOADS="$HOME/Downloads/programas"
 
 PROGRAMAS_PARA_INSTALAR=(
   build-essential 
+  curl
   docker
   docker-compose
   flameshot
@@ -90,7 +89,6 @@ mkdir "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_GOOGLE_CHROME"       -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_SIMPLE_NOTE"         -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_INSYNC"              -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_VIVALDI"		   -P "$DIRETORIO_DOWNLOADS"
 
 ## Instalando pacotes .deb baixados na sessão anterior ##
@@ -107,6 +105,17 @@ done
 
 sudo apt install --install-recommends winehq-stable wine-stable wine-stable-i386 wine-stable-amd64 -y
 
+# Instalar o Edge
+## Setup
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+sudo rm microsoft.gpg
+## Install
+sudo apt update
+sudo apt install microsoft-edge-dev
+
+
 ## Adicionando repositório Flathub ##
 
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && 
@@ -114,14 +123,15 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 ## Instalando pacotes Flatpak ##
 sudo flatpak install flathub io.dbeaver.DBeaverCommunity -y
 sudo flatpak install flathub com.jetbrains.PhpStorm -y 
+sudo flatpak install flathub com.spotify.Client -y
+sudo flatpak install flathub com.microsoft.Teams -y
+sudo flatpak install flathub com.visualstudio.code -y
+sudo flatpak install flathub rest.insomnia.Insomnia -y
+sudo flatpak install flathub com.wps.Office -y
 
 ## Instalando pacotes Snap ##
-sudo snap install spotify
-sudo snap install slack --classic
 sudo snap install photogimp
 sudo snap install --edge node --classic
-sudo snap install insomnia
-sudo snap install wps-office-multilang
 sudo snap install notion-snap
 # ---------------------------------------------------------------------- #
 
