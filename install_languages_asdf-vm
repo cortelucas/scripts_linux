@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+languages=(
+	python
+	nodejs
+	dotnet-core
+	rust
+)
+
+
+for plugin in ${languages[@]}; do
+	asdf plugin add "$plugin"
+	echo "Add Plugin -> $plugin"
+done
+
+for language in ${languages[@]}; do
+	asdf install "$language" latest
+	echo "Install Language -> $language"
+done
+
+. ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
+
+for language in ${languages[@]}; do
+	asdf global "$language" latest
+	echo "Add Version Language -> $language"
+done
