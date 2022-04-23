@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+# ----------------- Atualizador -----------------
+sudo apt update && sudo apt dist-upgrade -y
+flatpak update
+snap refresh
+sudo apt autoclean
+sudo apt autoremove -y
